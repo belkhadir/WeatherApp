@@ -9,23 +9,27 @@
 /* Begin PBXBuildFile section */
 		398485E3237EAA77000C2677 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398485E2237EAA77000C2677 /* AppDelegate.swift */; };
 		398485E5237EAA77000C2677 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398485E4237EAA77000C2677 /* SceneDelegate.swift */; };
-		398485E7237EAA77000C2677 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398485E6237EAA77000C2677 /* ViewController.swift */; };
-		398485EA237EAA77000C2677 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 398485E8237EAA77000C2677 /* Main.storyboard */; };
 		398485EC237EAA78000C2677 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 398485EB237EAA78000C2677 /* Assets.xcassets */; };
 		398485EF237EAA78000C2677 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 398485ED237EAA78000C2677 /* LaunchScreen.storyboard */; };
 		398485FB237EAD4E000C2677 /* NetworkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398485FA237EAD4E000C2677 /* NetworkHelper.swift */; };
+		398485FD237EB572000C2677 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398485FC237EB572000C2677 /* BaseTableViewCell.swift */; };
+		398485FF237EB5E4000C2677 /* CityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398485FE237EB5E4000C2677 /* CityTableViewCell.swift */; };
+		39848601237EB867000C2677 /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39848600237EB867000C2677 /* City.swift */; };
+		39848603237EBD05000C2677 /* CityTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39848602237EBD05000C2677 /* CityTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		398485DF237EAA77000C2677 /* Weather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Weather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		398485E2237EAA77000C2677 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		398485E4237EAA77000C2677 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		398485E6237EAA77000C2677 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		398485E9237EAA77000C2677 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		398485EB237EAA78000C2677 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		398485EE237EAA78000C2677 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		398485F0237EAA78000C2677 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		398485FA237EAD4E000C2677 /* NetworkHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHelper.swift; sourceTree = "<group>"; };
+		398485FC237EB572000C2677 /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
+		398485FE237EB5E4000C2677 /* CityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityTableViewCell.swift; sourceTree = "<group>"; };
+		39848600237EB867000C2677 /* City.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
+		39848602237EBD05000C2677 /* CityTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,8 +68,6 @@
 				398485F6237EAA9A000C2677 /* Model */,
 				398485E2237EAA77000C2677 /* AppDelegate.swift */,
 				398485E4237EAA77000C2677 /* SceneDelegate.swift */,
-				398485E6237EAA77000C2677 /* ViewController.swift */,
-				398485E8237EAA77000C2677 /* Main.storyboard */,
 				398485EB237EAA78000C2677 /* Assets.xcassets */,
 				398485ED237EAA78000C2677 /* LaunchScreen.storyboard */,
 				398485F0237EAA78000C2677 /* Info.plist */,
@@ -76,6 +78,7 @@
 		398485F6237EAA9A000C2677 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				39848600237EB867000C2677 /* City.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -83,6 +86,8 @@
 		398485F7237EAAA0000C2677 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				398485FC237EB572000C2677 /* BaseTableViewCell.swift */,
+				398485FE237EB5E4000C2677 /* CityTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -98,6 +103,7 @@
 		398485F9237EAAA9000C2677 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				39848602237EBD05000C2677 /* CityTableViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -162,7 +168,6 @@
 			files = (
 				398485EF237EAA78000C2677 /* LaunchScreen.storyboard in Resources */,
 				398485EC237EAA78000C2677 /* Assets.xcassets in Resources */,
-				398485EA237EAA77000C2677 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -173,24 +178,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				39848603237EBD05000C2677 /* CityTableViewController.swift in Sources */,
+				398485FF237EB5E4000C2677 /* CityTableViewCell.swift in Sources */,
 				398485FB237EAD4E000C2677 /* NetworkHelper.swift in Sources */,
-				398485E7237EAA77000C2677 /* ViewController.swift in Sources */,
 				398485E3237EAA77000C2677 /* AppDelegate.swift in Sources */,
+				398485FD237EB572000C2677 /* BaseTableViewCell.swift in Sources */,
 				398485E5237EAA77000C2677 /* SceneDelegate.swift in Sources */,
+				39848601237EB867000C2677 /* City.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		398485E8237EAA77000C2677 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				398485E9237EAA77000C2677 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		398485ED237EAA78000C2677 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
