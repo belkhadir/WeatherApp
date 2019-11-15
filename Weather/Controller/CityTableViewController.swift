@@ -82,6 +82,11 @@ class CityTableViewController: UITableViewController {
             saveContext()
         }
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedCity = citiesModelView[indexPath.item]
+        
+    }
 }
 
 // Mark: - Conform to NewCityDelegate

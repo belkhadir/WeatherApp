@@ -24,6 +24,13 @@
 		39848614237EECB8000C2677 /* Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39848613237EECB8000C2677 /* Identifiable.swift */; };
 		39848616237EF071000C2677 /* NewCityDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39848615237EF071000C2677 /* NewCityDelegate.swift */; };
 		39848618237EF274000C2677 /* MKMapItemModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39848617237EF274000C2677 /* MKMapItemModelView.swift */; };
+		3984861A237EFC69000C2677 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39848619237EFC69000C2677 /* DetailsViewController.swift */; };
+		3984861C237EFF6A000C2677 /* DarkskyApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3984861B237EFF6A000C2677 /* DarkskyApiService.swift */; };
+		3984861E237F00E9000C2677 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3984861D237F00E9000C2677 /* Constants.swift */; };
+		39848620237F03EC000C2677 /* GlobalData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3984861F237F03EC000C2677 /* GlobalData.swift */; };
+		39848622237F055A000C2677 /* BlockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39848621237F055A000C2677 /* BlockData.swift */; };
+		39848624237F0627000C2677 /* BlockDataDaily.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39848623237F0627000C2677 /* BlockDataDaily.swift */; };
+		39848626237F0656000C2677 /* MinetlyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39848625237F0656000C2677 /* MinetlyData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +53,13 @@
 		39848613237EECB8000C2677 /* Identifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identifiable.swift; sourceTree = "<group>"; };
 		39848615237EF071000C2677 /* NewCityDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCityDelegate.swift; sourceTree = "<group>"; };
 		39848617237EF274000C2677 /* MKMapItemModelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKMapItemModelView.swift; sourceTree = "<group>"; };
+		39848619237EFC69000C2677 /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
+		3984861B237EFF6A000C2677 /* DarkskyApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkskyApiService.swift; sourceTree = "<group>"; };
+		3984861D237F00E9000C2677 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		3984861F237F03EC000C2677 /* GlobalData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalData.swift; sourceTree = "<group>"; };
+		39848621237F055A000C2677 /* BlockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockData.swift; sourceTree = "<group>"; };
+		39848623237F0627000C2677 /* BlockDataDaily.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockDataDaily.swift; sourceTree = "<group>"; };
+		39848625237F0656000C2677 /* MinetlyData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinetlyData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +113,10 @@
 			isa = PBXGroup;
 			children = (
 				39848600237EB867000C2677 /* City.swift */,
+				3984861F237F03EC000C2677 /* GlobalData.swift */,
+				39848625237F0656000C2677 /* MinetlyData.swift */,
+				39848623237F0627000C2677 /* BlockDataDaily.swift */,
+				39848621237F055A000C2677 /* BlockData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -116,6 +134,7 @@
 			isa = PBXGroup;
 			children = (
 				398485FA237EAD4E000C2677 /* NetworkHelper.swift */,
+				3984861B237EFF6A000C2677 /* DarkskyApiService.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -125,6 +144,7 @@
 			children = (
 				39848602237EBD05000C2677 /* CityTableViewController.swift */,
 				39848610237EEAE9000C2677 /* NewCityTableViewController.swift */,
+				39848619237EFC69000C2677 /* DetailsViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -151,6 +171,7 @@
 			isa = PBXGroup;
 			children = (
 				3984860E237ECD93000C2677 /* Configuration.swift */,
+				3984861D237F00E9000C2677 /* Constants.swift */,
 			);
 			path = Configuration;
 			sourceTree = "<group>";
@@ -234,21 +255,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				39848624237F0627000C2677 /* BlockDataDaily.swift in Sources */,
 				39848603237EBD05000C2677 /* CityTableViewController.swift in Sources */,
+				39848626237F0656000C2677 /* MinetlyData.swift in Sources */,
 				398485FF237EB5E4000C2677 /* CityTableViewCell.swift in Sources */,
 				3984860C237EC97D000C2677 /* Weather.xcdatamodeld in Sources */,
 				398485FB237EAD4E000C2677 /* NetworkHelper.swift in Sources */,
 				39848606237EC588000C2677 /* CityModelView.swift in Sources */,
+				3984861C237EFF6A000C2677 /* DarkskyApiService.swift in Sources */,
 				398485E3237EAA77000C2677 /* AppDelegate.swift in Sources */,
 				39848614237EECB8000C2677 /* Identifiable.swift in Sources */,
 				398485FD237EB572000C2677 /* BaseTableViewCell.swift in Sources */,
 				39848609237EC94C000C2677 /* CoreDataStackManage.swift in Sources */,
 				398485E5237EAA77000C2677 /* SceneDelegate.swift in Sources */,
 				39848616237EF071000C2677 /* NewCityDelegate.swift in Sources */,
+				3984861A237EFC69000C2677 /* DetailsViewController.swift in Sources */,
 				39848601237EB867000C2677 /* City.swift in Sources */,
 				39848611237EEAE9000C2677 /* NewCityTableViewController.swift in Sources */,
+				39848620237F03EC000C2677 /* GlobalData.swift in Sources */,
 				3984860F237ECD93000C2677 /* Configuration.swift in Sources */,
 				39848618237EF274000C2677 /* MKMapItemModelView.swift in Sources */,
+				3984861E237F00E9000C2677 /* Constants.swift in Sources */,
+				39848622237F055A000C2677 /* BlockData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

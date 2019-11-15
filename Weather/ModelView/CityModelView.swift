@@ -16,6 +16,8 @@ class CityModelView  {
     var name: String
     var temperature: String
     var summary: String
+    var latitude: Double
+    var longitude: Double
     
     // Mark: - Object LifeCycle
     init(city: City) {
@@ -24,5 +26,7 @@ class CityModelView  {
         name = city.name
         temperature = String(format:"%.0f" + "℃", city.temperature)
         summary = city.summary
+        latitude = city.latitude
+        longitude = city.longitude
     }
 }
