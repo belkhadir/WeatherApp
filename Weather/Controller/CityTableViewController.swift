@@ -13,8 +13,16 @@ import CoreData
 class CityTableViewController: UITableViewController {
     // Mark: - Instance Properties
     fileprivate var citiesModelView = [CityModelView]()
-
-    fileprivate var updatedCitiesModelView = [CityModelView]()
+    fileprivate var filteredCity = [CityModelView]()
+    fileprivate let searchController = UISearchController(searchResultsController: nil)
+    
+    var isSearchBarEmpty: Bool {
+      return searchController.searchBar.text?.isEmpty ?? true
+    }
+    
+    var isFiltering: Bool {
+      return searchController.isActive && !isSearchBarEmpty
+    }
     
     // Mark: - Instance Properties
     override init(style: UITableView.Style) {
@@ -36,6 +44,7 @@ class CityTableViewController: UITableViewController {
     }
     
     fileprivate func prepareTheTableViewController() {
+        prepareThesearch()
         view.backgroundColor = .white
         refreshControl = UIRefreshControl()
         refreshControl?.addTarget(self, action: #selector(reloadData), for: .valueChanged)
@@ -54,6 +63,14 @@ class CityTableViewController: UITableViewController {
         present(nvNewCityVC, animated: true, completion: nil)
     }
     
+    func prepareThesearch() {
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "City"
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
+    }
+    
     @objc fileprivate func reloadData() {
         fetchAllDataFromServer()
     }
@@ -64,12 +81,20 @@ class CityTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if isFiltering {
+            return filteredCity.count
+        }
         return citiesModelView.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CityTableViewCell.reuseIdentifier, for: indexPath) as! CityTableViewCell
-        let item = citiesModelView[indexPath.item]
+        var item: CityModelView
+        if isFiltering {
+            item = filteredCity[indexPath.item]
+        }else {
+            item = citiesModelView[indexPath.item]
+        }
         cell.configure(cell: item)
         return cell
     }
@@ -99,6 +124,7 @@ class CityTableViewController: UITableViewController {
     // Using dispatch groups to fire an asynchronous callback when all your requests finish.
     // https://stackoverflow.com/questions/35906568/wait-until-swift-for-loop-with-asynchronous-network-requests-finishes-executing?rq=1
     fileprivate func fetchAllDataFromServer() {
+        refreshControl?.beginRefreshing()
         for (index, element) in citiesModelView.enumerated() {
             DarkskyApiService.forecast(city: element) { [weak self](result) in
                 guard let weakSelf = self else { return }
@@ -109,7 +135,6 @@ class CityTableViewController: UITableViewController {
                 case .success(let data):
                     DispatchQueue.main.async {
                         let city = CityModelView(data: data, nameOfCity: element.name)
-                        weakSelf.updatedCitiesModelView.append(city)
                         weakSelf.citiesModelView[index] = city
                         weakSelf.updateCityCoreData(city: element)
                         weakSelf.tableView.reloadData()
@@ -117,7 +142,7 @@ class CityTableViewController: UITableViewController {
                 }
             }
         }
-        
+        refreshControl?.endRefreshing()
         
     }
     
@@ -133,6 +158,13 @@ class CityTableViewController: UITableViewController {
             cities[0].setValue(city.summary, forKey: "summary")
             saveContext()
         }catch _ {}
+    }
+    
+    func filterContentForSearchText(_ searchText: String) {
+        filteredCity = citiesModelView.filter({ (city) -> Bool in
+            return city.name.lowercased().contains(searchText.lowercased())
+        })
+        tableView.reloadData()
     }
 }
 
@@ -167,3 +199,10 @@ extension CityTableViewController: NewCityDelegate {
     }
 }
 
+// Mark: - Conform to Search Results Updating
+extension CityTableViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        let searchBar = searchController.searchBar
+        filterContentForSearchText(searchBar.text!)
+    }
+}
