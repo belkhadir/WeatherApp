@@ -13,12 +13,14 @@ import CoreLocation
 
 class NewCityTableViewController: UITableViewController {
 
+    // Mark: - Instance Properties
     fileprivate let cities = [City]()
     var matchingItems: [MKMapItem] = []
-    
     private let searchController = UISearchController(searchResultsController: nil)
     
+    weak var delegate: NewCityDelegate?
     
+    // Mark: - Object LifeCycle
     override init(style: UITableView.Style) {
         super.init(style: style)
         prepareViewController()
@@ -39,11 +41,6 @@ class NewCityTableViewController: UITableViewController {
         
         searchController.searchBar.becomeFirstResponder()
     }
-
-    
-    // Mark: - Method
-    
-    
     
     // MARK: - Table view data source
 
@@ -61,8 +58,8 @@ class NewCityTableViewController: UITableViewController {
        
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let city = matchingItems[indexPath.row].placemark
-        print(city)
-        navigationController?.popViewController(animated: true)
+        delegate?.didFind(city: MKMapItemModelView(item: city))
+        dismiss(animated: true, completion: nil)
            
     }
        

@@ -42,4 +42,16 @@ final class City: NSManagedObject{
         self.summary = summary
         self.imageName = icon
     }
+    
+    init(newCity: MKMapItemModelView, insertInto context: NSManagedObjectContext){
+        let entity = NSEntityDescription.entity(forEntityName: "City", in: context)
+        super.init(entity: entity!, insertInto: context)
+        
+        name = newCity.cityName
+        latitude = newCity.latitude
+        longitude = newCity.longitude
+        summary = ""
+        imageName = ""
+        temperature = 0.0
+    }
 }

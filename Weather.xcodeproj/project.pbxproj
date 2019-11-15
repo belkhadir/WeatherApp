@@ -22,6 +22,8 @@
 		3984860F237ECD93000C2677 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3984860E237ECD93000C2677 /* Configuration.swift */; };
 		39848611237EEAE9000C2677 /* NewCityTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39848610237EEAE9000C2677 /* NewCityTableViewController.swift */; };
 		39848614237EECB8000C2677 /* Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39848613237EECB8000C2677 /* Identifiable.swift */; };
+		39848616237EF071000C2677 /* NewCityDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39848615237EF071000C2677 /* NewCityDelegate.swift */; };
+		39848618237EF274000C2677 /* MKMapItemModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39848617237EF274000C2677 /* MKMapItemModelView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +44,8 @@
 		3984860E237ECD93000C2677 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		39848610237EEAE9000C2677 /* NewCityTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCityTableViewController.swift; sourceTree = "<group>"; };
 		39848613237EECB8000C2677 /* Identifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identifiable.swift; sourceTree = "<group>"; };
+		39848615237EF071000C2677 /* NewCityDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCityDelegate.swift; sourceTree = "<group>"; };
+		39848617237EF274000C2677 /* MKMapItemModelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKMapItemModelView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +133,7 @@
 			isa = PBXGroup;
 			children = (
 				39848605237EC588000C2677 /* CityModelView.swift */,
+				39848617237EF274000C2677 /* MKMapItemModelView.swift */,
 			);
 			path = ModelView;
 			sourceTree = "<group>";
@@ -154,6 +159,7 @@
 			isa = PBXGroup;
 			children = (
 				39848613237EECB8000C2677 /* Identifiable.swift */,
+				39848615237EF071000C2677 /* NewCityDelegate.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -238,9 +244,11 @@
 				398485FD237EB572000C2677 /* BaseTableViewCell.swift in Sources */,
 				39848609237EC94C000C2677 /* CoreDataStackManage.swift in Sources */,
 				398485E5237EAA77000C2677 /* SceneDelegate.swift in Sources */,
+				39848616237EF071000C2677 /* NewCityDelegate.swift in Sources */,
 				39848601237EB867000C2677 /* City.swift in Sources */,
 				39848611237EEAE9000C2677 /* NewCityTableViewController.swift in Sources */,
 				3984860F237ECD93000C2677 /* Configuration.swift in Sources */,
+				39848618237EF274000C2677 /* MKMapItemModelView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

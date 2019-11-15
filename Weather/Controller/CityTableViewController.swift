@@ -43,8 +43,10 @@ class CityTableViewController: UITableViewController {
     }
     
     @objc fileprivate func addCity() {
-        let newCityTableViewController = UINavigationController(rootViewController: NewCityTableViewController(style: .grouped))
-        present(newCityTableViewController, animated: true, completion: nil)
+        let newCityTableViewController = NewCityTableViewController(style: .grouped)
+        newCityTableViewController.delegate = self
+        let nvNewCityVC = UINavigationController(rootViewController: newCityTableViewController)
+        present(nvNewCityVC, animated: true, completion: nil)
     }
     
     
@@ -80,4 +82,28 @@ class CityTableViewController: UITableViewController {
             saveContext()
         }
     }
+}
+
+// Mark: - Conform to NewCityDelegate
+extension CityTableViewController: NewCityDelegate {
+    func didFind(city: MKMapItemModelView) {
+        // Before we add the new city to our core data we check
+        // if the user added before we ignore it otherwise we add it
+        for element in citiesModelView {
+            if element.name == city.cityName {
+                return
+            }
+        }
+        
+        // Save it To Core data
+        let newCity = City(newCity: city, insertInto: sharedContext)
+        saveContext()
+        citiesModelView.append(CityModelView(city: newCity))
+        tableView.beginUpdates()
+        let indexPath = IndexPath(item: citiesModelView.count - 1, section: 0)
+        tableView.insertRows(at: [indexPath], with: .automatic)
+        tableView.endUpdates()
+    }
+    
+
 }
