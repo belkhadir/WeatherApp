@@ -82,7 +82,7 @@ func request<T: Decodable>(for type: T.Type,
             completion(Result.failure(DataResponseError.decoding))
             return
         }
-        debugPrint(convertToDictionary(data: jsonD))
+//        debugPrint(convertToDictionary(data: jsonD))
         do {
             let responseData = try JSONDecoder().decode(type.self, from: jsonD)
             print(responseData)

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -73,11 +73,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		39405D7EEEFCBA7762A50329 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		398485D6237EAA77000C2677 = {
 			isa = PBXGroup;
 			children = (
 				398485E1237EAA77000C2677 /* Weather */,
 				398485E0237EAA77000C2677 /* Products */,
+				39405D7EEEFCBA7762A50329 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};

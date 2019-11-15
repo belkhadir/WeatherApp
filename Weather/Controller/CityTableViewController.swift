@@ -13,7 +13,7 @@ import CoreData
 class CityTableViewController: UITableViewController {
     // Mark: - Instance Properties
     fileprivate var citiesModelView = [CityModelView]()
-    fileprivate let myGroup = DispatchGroup()
+
     fileprivate var updatedCitiesModelView = [CityModelView]()
     
     // Mark: - Instance Properties
@@ -39,7 +39,6 @@ class CityTableViewController: UITableViewController {
         view.backgroundColor = .white
         refreshControl = UIRefreshControl()
         refreshControl?.addTarget(self, action: #selector(reloadData), for: .valueChanged)
-        
         citiesModelView = fetchCityFromCoreData()
         tableView.register(CityTableViewCell.self, forCellReuseIdentifier: CityTableViewCell.reuseIdentifier)
         
@@ -100,36 +99,27 @@ class CityTableViewController: UITableViewController {
     // Using dispatch groups to fire an asynchronous callback when all your requests finish.
     // https://stackoverflow.com/questions/35906568/wait-until-swift-for-loop-with-asynchronous-network-requests-finishes-executing?rq=1
     fileprivate func fetchAllDataFromServer() {
-        updatedCitiesModelView.removeAll()
         for element in citiesModelView {
-            myGroup.enter()
             DarkskyApiService.forecast(city: element) { [weak self](result) in
-                // Maintain the retain cycle
                 guard let weakSelf = self else { return }
                 
                 switch result {
-                case .failure:
-                    print("Error")
+                case .failure(let error):
+                    debugPrint(error)
                 case .success(let data):
-                    let city = CityModelView(data: data, nameOfCity: element.name)
-                    weakSelf.updatedCitiesModelView.append(city)
-                    weakSelf.myGroup.leave()
+                    print("1")
+                    DispatchQueue.main.async {
+                        let city = CityModelView(data: data, nameOfCity: element.name)
+                        weakSelf.updatedCitiesModelView.append(city)
+                        weakSelf.citiesModelView.removeAll{ city.name == $0.name }
+                        weakSelf.citiesModelView.append(city)
+                        weakSelf.updateCityCoreData(city: element)
+                        weakSelf.tableView.reloadData()
+                    }
                 }
             }
         }
         
-        myGroup.notify(queue: .main) { [weak self] in
-            // Maintain the retain cycle
-            guard let weakSelf = self else { return }
-            
-            for element in weakSelf.updatedCitiesModelView {
-                weakSelf.updateCityCoreData(city: element)
-            }
-            weakSelf.citiesModelView.removeAll()
-            weakSelf.citiesModelView = weakSelf.updatedCitiesModelView
-            weakSelf.tableView.reloadData()
-            weakSelf.refreshControl?.endRefreshing()
-        }
         
     }
     
@@ -158,16 +148,26 @@ extension CityTableViewController: NewCityDelegate {
                 return
             }
         }
-        
-        // Save it To Core data
-        let newCity = City(newCity: city, insertInto: sharedContext)
-        saveContext()
-        citiesModelView.append(CityModelView(city: newCity))
-        tableView.beginUpdates()
-        let indexPath = IndexPath(item: citiesModelView.count - 1, section: 0)
-        tableView.insertRows(at: [indexPath], with: .automatic)
-        tableView.endUpdates()
+        DarkskyApiService.forecast(latitude: city.latitude, longitude: city.longitude) { [weak self](result) in
+            guard let weakSelf = self else { return }
+            
+            switch result {
+            case .failure: print("Error")
+            case .success(let data):
+                let cityModelView = CityModelView(data: data, nameOfCity: city.cityName)
+                weakSelf.citiesModelView.append(cityModelView)
+                DispatchQueue.main.async {
+                    let _ = City(newCity: city, insertInto: sharedContext)
+                    weakSelf.tableView.beginUpdates()
+                    let indexPath = IndexPath(item: weakSelf.citiesModelView.count - 1, section: 0)
+                    weakSelf.tableView.insertRows(at: [indexPath], with: .automatic)
+                    weakSelf.tableView.endUpdates()
+                }
+            }
+        }
     }
-    
+}
 
+func filterDuplicate() {
+    
 }
