@@ -10,7 +10,7 @@ import Foundation
 
 class DarkskyApiService {
     
-    static func forecast(city: City,completion: @escaping (Result<GlobalData, DataResponseError>) -> Void) {
+    static func forecast(city: CityModelView, completion: @escaping (Result<GlobalData, DataResponseError>) -> Void) {
         let query  = [URLQueryItem(name: "exclude", value: "hourly")]
         var path = "/forecast/" + API_SECRET_WEATHER
         path.append("/\(city.latitude),\(city.longitude)")

@@ -13,6 +13,8 @@ import CoreData
 class CityTableViewController: UITableViewController {
     // Mark: - Instance Properties
     fileprivate var citiesModelView = [CityModelView]()
+    fileprivate let myGroup = DispatchGroup()
+    fileprivate var updatedCitiesModelView = [CityModelView]()
     
     // Mark: - Instance Properties
     override init(style: UITableView.Style) {
@@ -35,11 +37,15 @@ class CityTableViewController: UITableViewController {
     
     fileprivate func prepareTheTableViewController() {
         view.backgroundColor = .white
+        refreshControl = UIRefreshControl()
+        refreshControl?.addTarget(self, action: #selector(reloadData), for: .valueChanged)
+        
         citiesModelView = fetchCityFromCoreData()
         tableView.register(CityTableViewCell.self, forCellReuseIdentifier: CityTableViewCell.reuseIdentifier)
         
         let addCityBarButtomItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addCity))
         navigationItem.setRightBarButton(addCityBarButtomItem, animated: true)
+        fetchAllDataFromServer()
     }
     
     @objc fileprivate func addCity() {
@@ -49,6 +55,9 @@ class CityTableViewController: UITableViewController {
         present(nvNewCityVC, animated: true, completion: nil)
     }
     
+    @objc fileprivate func reloadData() {
+        fetchAllDataFromServer()
+    }
     
     // Mark: - Data source tableView
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -86,6 +95,56 @@ class CityTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedCity = citiesModelView[indexPath.item]
         
+    }
+    
+    // Using dispatch groups to fire an asynchronous callback when all your requests finish.
+    // https://stackoverflow.com/questions/35906568/wait-until-swift-for-loop-with-asynchronous-network-requests-finishes-executing?rq=1
+    fileprivate func fetchAllDataFromServer() {
+        updatedCitiesModelView.removeAll()
+        for element in citiesModelView {
+            myGroup.enter()
+            DarkskyApiService.forecast(city: element) { [weak self](result) in
+                // Maintain the retain cycle
+                guard let weakSelf = self else { return }
+                
+                switch result {
+                case .failure:
+                    print("Error")
+                case .success(let data):
+                    let city = CityModelView(data: data, nameOfCity: element.name)
+                    weakSelf.updatedCitiesModelView.append(city)
+                    weakSelf.myGroup.leave()
+                }
+            }
+        }
+        
+        myGroup.notify(queue: .main) { [weak self] in
+            // Maintain the retain cycle
+            guard let weakSelf = self else { return }
+            
+            for element in weakSelf.updatedCitiesModelView {
+                weakSelf.updateCityCoreData(city: element)
+            }
+            weakSelf.citiesModelView.removeAll()
+            weakSelf.citiesModelView = weakSelf.updatedCitiesModelView
+            weakSelf.tableView.reloadData()
+            weakSelf.refreshControl?.endRefreshing()
+        }
+        
+    }
+    
+    func updateCityCoreData(city: CityModelView) {
+        let request: NSFetchRequest<City> = City.fetchRequest()
+        request.predicate = NSPredicate(format: "name = %@", city.name)
+        do {
+            let cities = try sharedContext.fetch(request)
+            if cities.count == 0 { return }
+            cities[0].setValue(city.temperature, forKey: "temperature")
+            cities[0].setValue(city.latitude, forKey: "latitude")
+            cities[0].setValue(city.longitude, forKey: "longitude")
+            cities[0].setValue(city.summary, forKey: "summary")
+            saveContext()
+        }catch _ {}
     }
 }
 

@@ -18,7 +18,7 @@ final class CityTableViewCell: BaseTableViewCell {
     // Mark: - Method
     func configure(cell with: CityModelView) {
         cityLabel.text = with.name
-        temperatureLabel.text = with.temperature
+        temperatureLabel.text = with.temperatureString
         summaryLabel.text = with.summary
     }
     
