@@ -10,7 +10,6 @@ import UIKit
 
 final class CityTableViewCell: BaseTableViewCell {
     // Mark: - Instance Properties
-    static let reuseIdentifier: String = "\(CityTableViewCell.self)"
     
     fileprivate let cityLabel = getLabel(fontName: "HelveticaNeue", size: 31)
     fileprivate let temperatureLabel = getLabel(fontName: "HelveticaNeue", size: 42)

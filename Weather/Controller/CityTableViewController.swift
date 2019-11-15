@@ -38,10 +38,13 @@ class CityTableViewController: UITableViewController {
         citiesModelView = fetchCityFromCoreData()
         tableView.register(CityTableViewCell.self, forCellReuseIdentifier: CityTableViewCell.reuseIdentifier)
         
+        let addCityBarButtomItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addCity))
+        navigationItem.setRightBarButton(addCityBarButtomItem, animated: true)
     }
     
-    @objc fileprivate func startEditing() {
-        tableView.setEditing(true, animated: true)
+    @objc fileprivate func addCity() {
+        let newCityTableViewController = UINavigationController(rootViewController: NewCityTableViewController(style: .grouped))
+        present(newCityTableViewController, animated: true, completion: nil)
     }
     
     
