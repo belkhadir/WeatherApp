@@ -14,12 +14,13 @@ final class CityTableViewCell: BaseTableViewCell {
     fileprivate let cityLabel = getLabel(fontName: "HelveticaNeue", size: 31)
     fileprivate let temperatureLabel = getLabel(fontName: "HelveticaNeue", size: 42)
     fileprivate let summaryLabel = getLabel(fontName: "HelveticaNeue-Light", size: 21)
-    
+    fileprivate let imageBackground = UIImageView()
     // Mark: - Method
     func configure(cell with: CityModelView) {
         cityLabel.text = with.name
         temperatureLabel.text = with.temperatureString
         summaryLabel.text = with.summary
+        backgroundView = with.imageView
     }
     
     // Mark: - BaseTableViewCell Method
@@ -53,7 +54,7 @@ final class CityTableViewCell: BaseTableViewCell {
     static func getLabel(fontName: String, size: CGFloat) -> UILabel {
         let label = UILabel()
         label.font = UIFont(name: fontName, size: size)
-        label.textColor = .black
+        label.textColor = .white
         return label
     }
 }

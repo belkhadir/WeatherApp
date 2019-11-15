@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		392B63DC237F494F0077F818 /* ImageFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392B63DB237F494F0077F818 /* ImageFactory.swift */; };
 		398485E3237EAA77000C2677 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398485E2237EAA77000C2677 /* AppDelegate.swift */; };
 		398485E5237EAA77000C2677 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398485E4237EAA77000C2677 /* SceneDelegate.swift */; };
 		398485EC237EAA78000C2677 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 398485EB237EAA78000C2677 /* Assets.xcassets */; };
@@ -34,6 +35,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		392B63DB237F494F0077F818 /* ImageFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFactory.swift; sourceTree = "<group>"; };
 		398485DF237EAA77000C2677 /* Weather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Weather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		398485E2237EAA77000C2677 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		398485E4237EAA77000C2677 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 				39848625237F0656000C2677 /* MinetlyData.swift */,
 				39848623237F0627000C2677 /* BlockDataDaily.swift */,
 				39848621237F055A000C2677 /* BlockData.swift */,
+				392B63DB237F494F0077F818 /* ImageFactory.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -274,6 +277,7 @@
 				398485E3237EAA77000C2677 /* AppDelegate.swift in Sources */,
 				39848614237EECB8000C2677 /* Identifiable.swift in Sources */,
 				398485FD237EB572000C2677 /* BaseTableViewCell.swift in Sources */,
+				392B63DC237F494F0077F818 /* ImageFactory.swift in Sources */,
 				39848609237EC94C000C2677 /* CoreDataStackManage.swift in Sources */,
 				398485E5237EAA77000C2677 /* SceneDelegate.swift in Sources */,
 				39848616237EF071000C2677 /* NewCityDelegate.swift in Sources */,

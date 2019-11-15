@@ -99,7 +99,7 @@ class CityTableViewController: UITableViewController {
     // Using dispatch groups to fire an asynchronous callback when all your requests finish.
     // https://stackoverflow.com/questions/35906568/wait-until-swift-for-loop-with-asynchronous-network-requests-finishes-executing?rq=1
     fileprivate func fetchAllDataFromServer() {
-        for element in citiesModelView {
+        for (index, element) in citiesModelView.enumerated() {
             DarkskyApiService.forecast(city: element) { [weak self](result) in
                 guard let weakSelf = self else { return }
                 
@@ -107,12 +107,10 @@ class CityTableViewController: UITableViewController {
                 case .failure(let error):
                     debugPrint(error)
                 case .success(let data):
-                    print("1")
                     DispatchQueue.main.async {
                         let city = CityModelView(data: data, nameOfCity: element.name)
                         weakSelf.updatedCitiesModelView.append(city)
-                        weakSelf.citiesModelView.removeAll{ city.name == $0.name }
-                        weakSelf.citiesModelView.append(city)
+                        weakSelf.citiesModelView[index] = city
                         weakSelf.updateCityCoreData(city: element)
                         weakSelf.tableView.reloadData()
                     }
@@ -162,12 +160,10 @@ extension CityTableViewController: NewCityDelegate {
                     let indexPath = IndexPath(item: weakSelf.citiesModelView.count - 1, section: 0)
                     weakSelf.tableView.insertRows(at: [indexPath], with: .automatic)
                     weakSelf.tableView.endUpdates()
+                    saveContext()
                 }
             }
         }
     }
 }
 
-func filterDuplicate() {
-    
-}
