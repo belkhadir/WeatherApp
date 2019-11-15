@@ -9,19 +9,17 @@
 import UIKit
 
 final class CityTableViewCell: BaseTableViewCell {
-
     // Mark: - Instance Properties
     static let reuseIdentifier: String = "\(CityTableViewCell.self)"
-    
     
     fileprivate let cityLabel = getLabel(fontName: "HelveticaNeue", size: 31)
     fileprivate let temperatureLabel = getLabel(fontName: "HelveticaNeue", size: 42)
     fileprivate let summaryLabel = getLabel(fontName: "HelveticaNeue-Light", size: 21)
     
     // Mark: - Method
-    func configure(cell with: City) {
+    func configure(cell with: CityModelView) {
         cityLabel.text = with.name
-        temperatureLabel.text = String(with.temperature) // Remeber to move to MVVM
+        temperatureLabel.text = with.temperature
         summaryLabel.text = with.summary
     }
     
@@ -53,8 +51,6 @@ final class CityTableViewCell: BaseTableViewCell {
         
     }
 
-    
-    
     static func getLabel(fontName: String, size: CGFloat) -> UILabel {
         let label = UILabel()
         label.font = UIFont(name: fontName, size: size)

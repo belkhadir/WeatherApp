@@ -6,37 +6,40 @@
 //  Copyright © 2019 Babel. All rights reserved.
 //
 
-import Foundation
+import CoreData
 
 
-final class City {
+final class City: NSManagedObject{
     
     // Mark: - Instance Properties
-    var name: String
-    var latitude: Double
-    var longitude: Double
+    @NSManaged var name: String
+    @NSManaged var latitude: Double
+    @NSManaged var longitude: Double
     
-    var temperature: Double
-    var summary: String
-    var icon: String
+    @NSManaged var temperature: Double
+    @NSManaged var summary: String
+    @NSManaged var imageName: String
+    
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<City> {
+        return NSFetchRequest<City>(entityName: "City")
+    }
     
     // Mark: - Object Life cycle
+    override init(entity: NSEntityDescription, insertInto context: NSManagedObjectContext?) {
+        super.init(entity: entity, insertInto: context)
+    }
+    
     init(name: String, latitude: Double = 0.0,
          longitude: Double = 0.0, temperature: Double = 14,
-        summary: String = "", icon: String = "") {
+        summary: String = "", icon: String = "", insertInto context: NSManagedObjectContext) {
+        let entity = NSEntityDescription.entity(forEntityName: "City", in: context)
+        super.init(entity: entity!, insertInto: context)
+        
         self.name = name
         self.latitude = latitude
         self.longitude = longitude
         self.temperature = temperature
         self.summary = summary
-        self.icon = icon
+        self.imageName = icon
     }
-    
-    static let cities = [
-        City(name: "Casablanca", summary: "Cloudy"),
-        City(name: "Rabat", summary: "Cloudy"),
-        City(name: "Marrakech", summary: "Cloudy"),
-        City(name: "Tangier", summary: "Cloudy"),
-        City(name: "Fes", summary: "Cloudy")
-    ]
 }
