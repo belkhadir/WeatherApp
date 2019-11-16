@@ -26,7 +26,7 @@ class CityModelView  {
     init(city: City) {
         name = city.name
         temperature = city.temperature
-        temperatureString = String(format:"%.0f" + "℃", city.temperature)
+        temperatureString = String(format:"%.0f" + "℃", (city.temperature - 32)/1.8)
         summary = city.summary
         latitude = city.latitude
         longitude = city.longitude
@@ -39,7 +39,7 @@ class CityModelView  {
         latitude = data.latitude
         longitude = data.longitude
         summary = data.currently.summary ?? ""
-        temperatureString = String(format:"%.0f" + "℃", data.currently.temperature ?? 0)
+        temperatureString = String(format:"%.0f" + "℃", (((data.currently.temperature ?? 0) - 32)/1.8))
         temperature = data.currently.temperature ?? 0
         imageName = data.currently.icon ?? ""
     }
@@ -52,6 +52,8 @@ class CityModelView  {
         
         return daily.map { BlockDataDailyModelView(blockdataDaily: $0) }
     }
+    
+
     
     // Background Image
     var imageView: UIImageView {
