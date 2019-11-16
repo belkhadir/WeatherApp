@@ -28,7 +28,7 @@ class DailyTableViewCell: BaseTableViewCell {
     
     override func setupLayout() {
         super.setupLayout()
-        backgroundColor = .clear
+        
         
         summryLabel.numberOfLines = 0
         

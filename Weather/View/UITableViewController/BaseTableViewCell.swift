@@ -24,6 +24,6 @@ class BaseTableViewCell: UITableViewCell {
     
     // Mark: - Method
     internal func setupLayout() {
-        
+        backgroundColor = .clear
     }
 }

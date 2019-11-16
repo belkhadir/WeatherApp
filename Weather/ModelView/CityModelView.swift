@@ -21,6 +21,8 @@ class CityModelView  {
     var temperature: Double
     var imageName: String
     
+    private var globalData: GlobalData?
+    
     // Mark: - Object LifeCycle
     init(city: City) {
 //        self.city = city
@@ -35,6 +37,7 @@ class CityModelView  {
     }
     
     init(data: GlobalData, nameOfCity: String) {
+        globalData = data
         name = nameOfCity
         latitude = data.latitude
         longitude = data.longitude
@@ -61,4 +64,16 @@ class CityModelView  {
     var iconImages: [UIImage] {
         return ImageFacotory(string: imageName)?.images ?? [UIImage]()
     }
+    
+    func getDetailData() -> [(key: String, value: Any, icon: String)]{
+        guard let currently = globalData?.currently else {
+            return [(key: String, value: Any, icon: String)]()
+        }
+        return  [   ("Humidity", currently.humidity!, "weather_detail_humidity"),
+                    ("Pressure", currently.pressure!, "weather_detail_pressure"),
+                    ("UV Index", currently.uvIndex!, "weather_detail_uv_index"),
+                    ("Visibility", currently.visibility!, "weather_detail_visibility"),]
+        
+    }
+
 }
