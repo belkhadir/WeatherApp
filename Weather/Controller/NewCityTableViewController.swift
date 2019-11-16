@@ -16,7 +16,6 @@ class NewCityTableViewController: BaseTableViwController {
     // Mark: - Instance Properties
     fileprivate let cities = [City]()
     var matchingItems: [MKMapItem] = []
-    private let searchController = UISearchController(searchResultsController: nil)
     
     weak var delegate: NewCityDelegate?
     
@@ -28,12 +27,6 @@ class NewCityTableViewController: BaseTableViwController {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: UITableViewCell.reuseIdentifier)
         
         searchController.searchResultsUpdater = self
-        searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Search for location"
-        navigationItem.searchController = searchController
-        definesPresentationContext = true
-        
-        searchController.searchBar.becomeFirstResponder()
     }
     
     // Mark: - Method
@@ -87,7 +80,6 @@ class NewCityTableViewController: BaseTableViwController {
         let city = matchingItems[indexPath.row].placemark
         delegate?.didFind(city: MKMapItemModelView(item: city))
         dismiss(animated: true, completion: nil)
-           
     }
        
 
@@ -111,22 +103,5 @@ extension NewCityTableViewController: UISearchResultsUpdating {
             self.tableView.reloadData()
         }
     }
-    
-    func updateSearchResultsForSearchController(searchController: UISearchController) {
-        guard let searchBarText = searchController.searchBar.text else { return }
-        
-        let request = MKLocalSearch.Request()
-        request.naturalLanguageQuery = searchBarText
-        
-        let search = MKLocalSearch(request: request)
-        
-        search.start { response, _ in
-            guard let response = response else {
-                return
-            }
-            self.matchingItems = response.mapItems
-            self.tableView.reloadData()
-        }
-        
-    }
+
 }

@@ -60,7 +60,7 @@ class DetailsTableViewController: UITableViewController {
         tableView.backgroundView = cityViewModel.imageView
         tableView.register(DailyTableViewCell.self, forCellReuseIdentifier: DailyTableViewCell.reuseIdentifier)
         tableView.register(DetailTableViewCell.self, forCellReuseIdentifier: DetailTableViewCell.reuseIdentifier)
-   
+        
         blockDataDailyModelView = cityViewModel.dailyDataModel
         tableView.reloadData()
     }

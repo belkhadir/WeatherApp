@@ -10,6 +10,7 @@ import UIKit
 
 
 class BaseTableViwController: UITableViewController {
+    internal let searchController = UISearchController(searchResultsController: nil)
     
     // Mark: - Object LifeCycle
     override init(style: UITableView.Style) {
@@ -24,6 +25,13 @@ class BaseTableViwController: UITableViewController {
     
     // Mark: - Method
     internal func prepareTheTableViewController() {
-        
+        prepareThesearch()
+    }
+    
+    private func prepareThesearch() {
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "City"
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
     }
 }

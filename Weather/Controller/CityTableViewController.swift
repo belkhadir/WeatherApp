@@ -14,7 +14,6 @@ class CityTableViewController: BaseTableViwController {
     // Mark: - Instance Properties
     fileprivate var citiesModelView = [CityModelView]()
     fileprivate var filteredCity = [CityModelView]()
-    fileprivate let searchController = UISearchController(searchResultsController: nil)
     
     var isSearchBarEmpty: Bool {
       return searchController.searchBar.text?.isEmpty ?? true
@@ -27,7 +26,8 @@ class CityTableViewController: BaseTableViwController {
     // Mark: - The base Configuration for the Controller
     override func prepareTheTableViewController() {
         super.prepareTheTableViewController()
-        prepareThesearch()
+        
+        searchController.searchResultsUpdater = self
         view.backgroundColor = .white
         
         // setup the refreshControl
@@ -43,16 +43,7 @@ class CityTableViewController: BaseTableViwController {
         
         fetchAllDataFromServer()
     }
-    
-    func prepareThesearch() {
-        searchController.searchResultsUpdater = self
-        searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "City"
-        navigationItem.searchController = searchController
-        definesPresentationContext = true
-    }
-    
-    
+
     // Mark: - Method
     fileprivate func fetchCityFromCoreData() -> [CityModelView] {
         let request: NSFetchRequest<City> = City.fetchRequest()
@@ -96,7 +87,6 @@ class CityTableViewController: BaseTableViwController {
         refreshControl?.endRefreshing()
     }
     
-    
     func filterContentForSearchText(_ searchText: String) {
         filteredCity = citiesModelView.filter({ (city) -> Bool in
             return city.name.lowercased().contains(searchText.lowercased())
@@ -137,11 +127,10 @@ class CityTableViewController: BaseTableViwController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if (editingStyle == .delete) {
             // handle delete (by removing the data from your array and updating the tableview)
-            citiesModelView.remove(at: indexPath.item)
+            citiesModelView.remove(at: indexPath.item).deletCityFromCoreData()
             tableView.beginUpdates()
             tableView.deleteRows(at: [indexPath], with: .fade)
             tableView.endUpdates()
-            saveContext()
         }
     }
     
