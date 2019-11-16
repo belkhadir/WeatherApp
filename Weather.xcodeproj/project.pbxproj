@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		392B63DC237F494F0077F818 /* ImageFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392B63DB237F494F0077F818 /* ImageFactory.swift */; };
+		392B63DE237FFE490077F818 /* DailyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392B63DD237FFE490077F818 /* DailyTableViewCell.swift */; };
+		392B63E0237FFF860077F818 /* BlockDataDailyModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392B63DF237FFF860077F818 /* BlockDataDailyModelView.swift */; };
+		392B63E32380033D0077F818 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392B63E22380033D0077F818 /* Helper.swift */; };
+		392B63E8238010D90077F818 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392B63E7238010D90077F818 /* HeaderView.swift */; };
 		398485E3237EAA77000C2677 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398485E2237EAA77000C2677 /* AppDelegate.swift */; };
 		398485E5237EAA77000C2677 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398485E4237EAA77000C2677 /* SceneDelegate.swift */; };
 		398485EC237EAA78000C2677 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 398485EB237EAA78000C2677 /* Assets.xcassets */; };
@@ -25,7 +29,7 @@
 		39848614237EECB8000C2677 /* Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39848613237EECB8000C2677 /* Identifiable.swift */; };
 		39848616237EF071000C2677 /* NewCityDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39848615237EF071000C2677 /* NewCityDelegate.swift */; };
 		39848618237EF274000C2677 /* MKMapItemModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39848617237EF274000C2677 /* MKMapItemModelView.swift */; };
-		3984861A237EFC69000C2677 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39848619237EFC69000C2677 /* DetailsViewController.swift */; };
+		3984861A237EFC69000C2677 /* DetailsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39848619237EFC69000C2677 /* DetailsTableViewController.swift */; };
 		3984861C237EFF6A000C2677 /* DarkskyApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3984861B237EFF6A000C2677 /* DarkskyApiService.swift */; };
 		3984861E237F00E9000C2677 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3984861D237F00E9000C2677 /* Constants.swift */; };
 		39848620237F03EC000C2677 /* GlobalData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3984861F237F03EC000C2677 /* GlobalData.swift */; };
@@ -36,6 +40,10 @@
 
 /* Begin PBXFileReference section */
 		392B63DB237F494F0077F818 /* ImageFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFactory.swift; sourceTree = "<group>"; };
+		392B63DD237FFE490077F818 /* DailyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyTableViewCell.swift; sourceTree = "<group>"; };
+		392B63DF237FFF860077F818 /* BlockDataDailyModelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockDataDailyModelView.swift; sourceTree = "<group>"; };
+		392B63E22380033D0077F818 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
+		392B63E7238010D90077F818 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		398485DF237EAA77000C2677 /* Weather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Weather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		398485E2237EAA77000C2677 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		398485E4237EAA77000C2677 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -55,7 +63,7 @@
 		39848613237EECB8000C2677 /* Identifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identifiable.swift; sourceTree = "<group>"; };
 		39848615237EF071000C2677 /* NewCityDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCityDelegate.swift; sourceTree = "<group>"; };
 		39848617237EF274000C2677 /* MKMapItemModelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKMapItemModelView.swift; sourceTree = "<group>"; };
-		39848619237EFC69000C2677 /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
+		39848619237EFC69000C2677 /* DetailsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsTableViewController.swift; sourceTree = "<group>"; };
 		3984861B237EFF6A000C2677 /* DarkskyApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkskyApiService.swift; sourceTree = "<group>"; };
 		3984861D237F00E9000C2677 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		3984861F237F03EC000C2677 /* GlobalData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalData.swift; sourceTree = "<group>"; };
@@ -75,6 +83,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		392B63E1238003370077F818 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				392B63E22380033D0077F818 /* Helper.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		392B63E5238010BF0077F818 /* UITableViewController */ = {
+			isa = PBXGroup;
+			children = (
+				398485FC237EB572000C2677 /* BaseTableViewCell.swift */,
+				398485FE237EB5E4000C2677 /* CityTableViewCell.swift */,
+				392B63DD237FFE490077F818 /* DailyTableViewCell.swift */,
+			);
+			path = UITableViewController;
+			sourceTree = "<group>";
+		};
+		392B63E6238010CD0077F818 /* UIView */ = {
+			isa = PBXGroup;
+			children = (
+				392B63E7238010D90077F818 /* HeaderView.swift */,
+			);
+			path = UIView;
+			sourceTree = "<group>";
+		};
 		39405D7EEEFCBA7762A50329 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -102,6 +136,7 @@
 		398485E1237EAA77000C2677 /* Weather */ = {
 			isa = PBXGroup;
 			children = (
+				392B63E1238003370077F818 /* Helper */,
 				39848612237EECAB000C2677 /* Protocol */,
 				3984860D237ECD7A000C2677 /* Configuration */,
 				39848607237EC90C000C2677 /* CoreData */,
@@ -135,8 +170,8 @@
 		398485F7237EAAA0000C2677 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				398485FC237EB572000C2677 /* BaseTableViewCell.swift */,
-				398485FE237EB5E4000C2677 /* CityTableViewCell.swift */,
+				392B63E6238010CD0077F818 /* UIView */,
+				392B63E5238010BF0077F818 /* UITableViewController */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -155,7 +190,7 @@
 			children = (
 				39848602237EBD05000C2677 /* CityTableViewController.swift */,
 				39848610237EEAE9000C2677 /* NewCityTableViewController.swift */,
-				39848619237EFC69000C2677 /* DetailsViewController.swift */,
+				39848619237EFC69000C2677 /* DetailsTableViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -165,6 +200,7 @@
 			children = (
 				39848605237EC588000C2677 /* CityModelView.swift */,
 				39848617237EF274000C2677 /* MKMapItemModelView.swift */,
+				392B63DF237FFF860077F818 /* BlockDataDailyModelView.swift */,
 			);
 			path = ModelView;
 			sourceTree = "<group>";
@@ -275,18 +311,22 @@
 				39848606237EC588000C2677 /* CityModelView.swift in Sources */,
 				3984861C237EFF6A000C2677 /* DarkskyApiService.swift in Sources */,
 				398485E3237EAA77000C2677 /* AppDelegate.swift in Sources */,
+				392B63DE237FFE490077F818 /* DailyTableViewCell.swift in Sources */,
 				39848614237EECB8000C2677 /* Identifiable.swift in Sources */,
 				398485FD237EB572000C2677 /* BaseTableViewCell.swift in Sources */,
 				392B63DC237F494F0077F818 /* ImageFactory.swift in Sources */,
 				39848609237EC94C000C2677 /* CoreDataStackManage.swift in Sources */,
+				392B63E0237FFF860077F818 /* BlockDataDailyModelView.swift in Sources */,
 				398485E5237EAA77000C2677 /* SceneDelegate.swift in Sources */,
 				39848616237EF071000C2677 /* NewCityDelegate.swift in Sources */,
-				3984861A237EFC69000C2677 /* DetailsViewController.swift in Sources */,
+				3984861A237EFC69000C2677 /* DetailsTableViewController.swift in Sources */,
 				39848601237EB867000C2677 /* City.swift in Sources */,
+				392B63E8238010D90077F818 /* HeaderView.swift in Sources */,
 				39848611237EEAE9000C2677 /* NewCityTableViewController.swift in Sources */,
 				39848620237F03EC000C2677 /* GlobalData.swift in Sources */,
 				3984860F237ECD93000C2677 /* Configuration.swift in Sources */,
 				39848618237EF274000C2677 /* MKMapItemModelView.swift in Sources */,
+				392B63E32380033D0077F818 /* Helper.swift in Sources */,
 				3984861E237F00E9000C2677 /* Constants.swift in Sources */,
 				39848622237F055A000C2677 /* BlockData.swift in Sources */,
 			);

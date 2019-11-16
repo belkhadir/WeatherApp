@@ -44,6 +44,7 @@ class CityModelView  {
         imageName = data.currently.icon ?? ""
     }
     
+    // Background Image
     var imageView: UIImageView {
         guard let image = ImageFacotory(string: imageName)?.backgroundImage else {
             return UIImageView()
@@ -54,5 +55,10 @@ class CityModelView  {
         imageView.contentMode = .scaleAspectFill
         
         return imageView
+    }
+    
+    // Animate Image
+    var iconImages: [UIImage] {
+        return ImageFacotory(string: imageName)?.images ?? [UIImage]()
     }
 }

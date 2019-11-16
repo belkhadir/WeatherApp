@@ -117,8 +117,14 @@ class CityTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedCity = citiesModelView[indexPath.item]
-        
+        var selectedCity: CityModelView
+        if isFiltering {
+            selectedCity = filteredCity[indexPath.item]
+        }else {
+            selectedCity = citiesModelView[indexPath.item]
+        }
+        let detailViewController = DetailsTableViewController(cityViewModel: selectedCity, style: .grouped)
+        navigationController?.pushViewController(detailViewController, animated: true)
     }
     
     // Using dispatch groups to fire an asynchronous callback when all your requests finish.

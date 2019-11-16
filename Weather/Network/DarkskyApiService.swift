@@ -23,5 +23,4 @@ class DarkskyApiService {
         path.append("/\(latitude),\(longitude)")
         request(for: GlobalData.self, host: "api.darksky.net", path: path, query: query, method: HTTPMethod.get) {completion($0)}
     }
-    
 }

@@ -51,10 +51,4 @@ final class CityTableViewCell: BaseTableViewCell {
         
     }
 
-    static func getLabel(fontName: String, size: CGFloat) -> UILabel {
-        let label = UILabel()
-        label.font = UIFont(name: fontName, size: size)
-        label.textColor = .white
-        return label
-    }
 }
