@@ -86,8 +86,12 @@ class CityModelView  {
     
     // Mark: - CRUD for Core Data
     func findCityInCoreData() -> City? {
+        return CityModelView.find(city: name)
+    }
+    
+    static func find(city: String) -> City? {
         let request: NSFetchRequest<City> = City.fetchRequest()
-        request.predicate = NSPredicate(format: "name = %@", name)
+        request.predicate = NSPredicate(format: "name = %@", city)
         do {
             let cities = try sharedContext.fetch(request)
             if cities.count == 0 { return nil}
@@ -110,4 +114,31 @@ class CityModelView  {
         saveContext()
     }
     
+    func saveCity() {
+        _ = City(name: name, latitude: latitude, longitude: longitude, temperature: temperature, summary: summary, icon: imageName)
+        saveContext()
+    }
+    
+    static func removeAllCities() {
+        let request: NSFetchRequest<City> = City.fetchRequest()
+        
+        do {
+            let results = try sharedContext.fetch(request)
+            for element in results {
+                sharedContext.delete(element)
+            }
+            
+            try sharedContext.save()
+        } catch {
+            print ("There was an error")
+        }
+    }
+    
+    static func fetchAllCities() -> [CityModelView] {
+           let request: NSFetchRequest<City> = City.fetchRequest()
+           
+           do {
+               return try sharedContext.fetch(request).map { CityModelView(city: $0) }
+           }catch _ { return  [CityModelView]() }
+    }
 }

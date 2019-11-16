@@ -31,9 +31,9 @@ final class City: NSManagedObject{
     
     init(name: String, latitude: Double = 0.0,
          longitude: Double = 0.0, temperature: Double = 14,
-        summary: String = "", icon: String = "", insertInto context: NSManagedObjectContext) {
-        let entity = NSEntityDescription.entity(forEntityName: "City", in: context)
-        super.init(entity: entity!, insertInto: context)
+        summary: String = "", icon: String = "") {
+        let entity = NSEntityDescription.entity(forEntityName: "City", in: sharedContext)
+        super.init(entity: entity!, insertInto: sharedContext)
         
         self.name = name
         self.latitude = latitude

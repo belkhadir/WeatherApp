@@ -35,7 +35,7 @@ class CityTableViewController: BaseTableViwController {
         refreshControl?.addTarget(self, action: #selector(reloadData), for: .valueChanged)
         refreshControl?.beginRefreshing()
         
-        citiesModelView = fetchCityFromCoreData()
+        citiesModelView = CityModelView.fetchAllCities()
         tableView.register(CityTableViewCell.self, forCellReuseIdentifier: CityTableViewCell.reuseIdentifier)
         
         let addCityBarButtomItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addCity))
@@ -45,14 +45,6 @@ class CityTableViewController: BaseTableViwController {
     }
 
     // Mark: - Method
-    fileprivate func fetchCityFromCoreData() -> [CityModelView] {
-        let request: NSFetchRequest<City> = City.fetchRequest()
-        
-        do {
-            return try sharedContext.fetch(request).map { CityModelView(city: $0) }
-        }catch _ { return  [CityModelView]() }
-    }
-
     @objc fileprivate func addCity() {
         let newCityTableViewController = NewCityTableViewController(style: .grouped)
         newCityTableViewController.delegate = self
@@ -78,7 +70,7 @@ class CityTableViewController: BaseTableViwController {
                     DispatchQueue.main.async {
                         let city = CityModelView(data: data, nameOfCity: element.name)
                         weakSelf.citiesModelView[index] = city
-                        element.updateCityCoreData()
+                        city.updateCityCoreData()
                         weakSelf.tableView.reloadData()
                     }
                 }
@@ -167,12 +159,11 @@ extension CityTableViewController: NewCityDelegate {
                 let cityModelView = CityModelView(data: data, nameOfCity: city.cityName)
                 weakSelf.citiesModelView.append(cityModelView)
                 DispatchQueue.main.async {
-                    let _ = City(newCity: city, insertInto: sharedContext)
+                    cityModelView.saveCity()
                     weakSelf.tableView.beginUpdates()
                     let indexPath = IndexPath(item: weakSelf.citiesModelView.count - 1, section: 0)
                     weakSelf.tableView.insertRows(at: [indexPath], with: .automatic)
                     weakSelf.tableView.endUpdates()
-                    saveContext()
                 }
             }
         }

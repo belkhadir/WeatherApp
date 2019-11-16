@@ -42,7 +42,6 @@ class DetailsTableViewController: UITableViewController {
     // Mark: - Object LifeCycle
     init(cityViewModel: CityModelView, style: UITableView.Style) {
         self.cityViewModel = cityViewModel
-        detailCity = cityViewModel.getDetailData()
         super.init(style: style)
         prepareController()
         
@@ -61,6 +60,7 @@ class DetailsTableViewController: UITableViewController {
         tableView.register(DailyTableViewCell.self, forCellReuseIdentifier: DailyTableViewCell.reuseIdentifier)
         tableView.register(DetailTableViewCell.self, forCellReuseIdentifier: DetailTableViewCell.reuseIdentifier)
         
+        detailCity = cityViewModel.getDetailData()
         blockDataDailyModelView = cityViewModel.dailyDataModel
         tableView.reloadData()
     }
