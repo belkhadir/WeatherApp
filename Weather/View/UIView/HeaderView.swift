@@ -10,12 +10,13 @@ import UIKit
 
 
 class HeaderView: UIView {
-    
+    // Mark: - Instance Properties
     fileprivate let titleLabel = getLabel(fontName: "HelveticaNeue-Bold", size: 51)
     fileprivate let summuryLabel = getLabel(fontName: "HelveticaNeue", size: 17)
     fileprivate let temperatureLabel = getLabel(fontName: "HelveticaNeue-Bold", size: 35)
     fileprivate let iconImageView = UIImageView()
     
+    // Mark: - Object LifeCylce
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupLayout()
@@ -25,6 +26,7 @@ class HeaderView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // Mark: - Method
     func configure(header city: CityModelView) {
         titleLabel.text = city.name
         temperatureLabel.text = city.temperatureString
@@ -60,8 +62,6 @@ class HeaderView: UIView {
         
         overAllStack.translatesAutoresizingMaskIntoConstraints = false
         addSubview(overAllStack)
-
-//        overAllStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 32).isActive = true
         overAllStack.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         overAllStack.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
     }

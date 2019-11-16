@@ -10,11 +10,12 @@ import UIKit
 
 class DetailsTableViewController: UITableViewController {
 
-    // Mark: - Object Instance
+    // Mark: - Instance Properties
     fileprivate var blockDataDailyModelView = [BlockDataDailyModelView]()
     fileprivate let cityViewModel: CityModelView
     fileprivate var detailCity =  [(key: String, value: Any, icon: String)]()
     
+    // It's Helpful Enum Usage Section(section: 0).numberOfRowInSection
     enum Section: Int, CaseIterable {
         case daily
         case detail
@@ -50,8 +51,19 @@ class DetailsTableViewController: UITableViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    
+
+    // Mark: - Method
+    fileprivate func prepareController() {
+        
+        tableView.allowsSelection = false
+        tableView.backgroundColor = UIColor.clear
+        tableView.backgroundView = cityViewModel.imageView
+        tableView.register(DailyTableViewCell.self, forCellReuseIdentifier: DailyTableViewCell.reuseIdentifier)
+        tableView.register(DetailTableViewCell.self, forCellReuseIdentifier: DetailTableViewCell.reuseIdentifier)
+   
+        blockDataDailyModelView = cityViewModel.dailyDataModel
+        tableView.reloadData()
+    }
     
     // Mark: - Table View Data Source
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -94,33 +106,5 @@ class DetailsTableViewController: UITableViewController {
             return UIView()
         }
     }
-    
-    
-    // Mark: - Method
-    fileprivate func prepareController() {
-        
-        tableView.allowsSelection = false
-        tableView.backgroundColor = UIColor.clear
-        tableView.backgroundView = cityViewModel.imageView
-        tableView.register(DailyTableViewCell.self, forCellReuseIdentifier: DailyTableViewCell.reuseIdentifier)
-        tableView.register(DetailTableViewCell.self, forCellReuseIdentifier: DetailTableViewCell.reuseIdentifier)
-        getDailyData()
-    }
-    
-    fileprivate func getDailyData() {
-        print(cityViewModel.latitude)
-        DarkskyApiService.forecast(city: cityViewModel) {[weak self] (result) in
-            guard let weakSelf = self else { return }
-            switch result {
-            case .failure(let error):
-                debugPrint(error)
-            case .success(let data):
-                guard let daily = data.daily?.data else { return }
-                weakSelf.blockDataDailyModelView = daily.map { BlockDataDailyModelView(blockdataDaily: $0) }
-                DispatchQueue.main.async {
-                    weakSelf.tableView.reloadData()
-                }
-            }
-        }
-    }
+
 }

@@ -11,7 +11,7 @@ import MapKit
 import CoreLocation
 
 
-class NewCityTableViewController: UITableViewController {
+class NewCityTableViewController: BaseTableViwController {
 
     // Mark: - Instance Properties
     fileprivate let cities = [City]()
@@ -20,17 +20,11 @@ class NewCityTableViewController: UITableViewController {
     
     weak var delegate: NewCityDelegate?
     
-    // Mark: - Object LifeCycle
-    override init(style: UITableView.Style) {
-        super.init(style: style)
-        prepareViewController()
-    }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-    fileprivate func prepareViewController() {
+    
+    // Mark: - The base Configuration for the Controller
+    override func prepareTheTableViewController() {
+        super.prepareTheTableViewController()
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: UITableViewCell.reuseIdentifier)
         
         searchController.searchResultsUpdater = self
@@ -42,27 +36,7 @@ class NewCityTableViewController: UITableViewController {
         searchController.searchBar.becomeFirstResponder()
     }
     
-    // MARK: - Table view data source
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return matchingItems.count
-    }
-       
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: UITableViewCell.reuseIdentifier, for: indexPath)
-        let selectedItem = matchingItems[indexPath.row].placemark
-        cell.textLabel?.text = selectedItem.name
-        cell.detailTextLabel?.text = parseAddress(selectedItem: selectedItem)
-        return cell
-    }
-       
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let city = matchingItems[indexPath.row].placemark
-        delegate?.didFind(city: MKMapItemModelView(item: city))
-        dismiss(animated: true, completion: nil)
-           
-    }
-       
+    // Mark: - Method
     func parseAddress(selectedItem:MKPlacemark) -> String {
            
            // put a space between "4" and "Melrose Place"
@@ -94,6 +68,29 @@ class NewCityTableViewController: UITableViewController {
            
         return addressLine
     }
+    
+    // MARK: - Table view data source
+
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return matchingItems.count
+    }
+       
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: UITableViewCell.reuseIdentifier, for: indexPath)
+        let selectedItem = matchingItems[indexPath.row].placemark
+        cell.textLabel?.text = selectedItem.name
+        cell.detailTextLabel?.text = parseAddress(selectedItem: selectedItem)
+        return cell
+    }
+       
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let city = matchingItems[indexPath.row].placemark
+        delegate?.didFind(city: MKMapItemModelView(item: city))
+        dismiss(animated: true, completion: nil)
+           
+    }
+       
+
 }
 
 // Mark: - Conform to Search Results Updating

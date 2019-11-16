@@ -7,12 +7,11 @@
 //
 
 import UIKit
+import CoreData
 
 class CityModelView  {
     
     // Mark: - Instance Properties
-//    private let city: City
-    
     var name: String
     var temperatureString: String
     var summary: String
@@ -25,8 +24,6 @@ class CityModelView  {
     
     // Mark: - Object LifeCycle
     init(city: City) {
-//        self.city = city
-        
         name = city.name
         temperature = city.temperature
         temperatureString = String(format:"%.0f" + "℃", city.temperature)
@@ -47,6 +44,15 @@ class CityModelView  {
         imageName = data.currently.icon ?? ""
     }
     
+    // Mark: - Compute Properties
+    var dailyDataModel: [BlockDataDailyModelView]  {
+        guard let daily = globalData?.daily?.data else {
+            return  [BlockDataDailyModelView]()
+        }
+        
+        return daily.map { BlockDataDailyModelView(blockdataDaily: $0) }
+    }
+    
     // Background Image
     var imageView: UIImageView {
         guard let image = ImageFacotory(string: imageName)?.backgroundImage else {
@@ -60,11 +66,13 @@ class CityModelView  {
         return imageView
     }
     
-    // Animate Image
+    // Animated Image
     var iconImages: [UIImage] {
         return ImageFacotory(string: imageName)?.images ?? [UIImage]()
     }
     
+    
+    // Mark: - Method
     func getDetailData() -> [(key: String, value: Any, icon: String)]{
         guard let currently = globalData?.currently else {
             return [(key: String, value: Any, icon: String)]()
@@ -75,5 +83,21 @@ class CityModelView  {
                     ("Visibility", currently.visibility!, "weather_detail_visibility"),]
         
     }
+    
+    // Update Core Data
+    func updateCityCoreData() {
+        let request: NSFetchRequest<City> = City.fetchRequest()
+        request.predicate = NSPredicate(format: "name = %@", name)
+        do {
+            let cities = try sharedContext.fetch(request)
+            if cities.count == 0 { return }
+            cities[0].setValue(temperature, forKey: "temperature")
+            cities[0].setValue(latitude, forKey: "latitude")
+            cities[0].setValue(longitude, forKey: "longitude")
+            cities[0].setValue(summary, forKey: "summary")
+            saveContext()
+        }catch _ {}
+    }
 
+    
 }

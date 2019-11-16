@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 
 
-class CityTableViewController: UITableViewController {
+class CityTableViewController: BaseTableViwController {
     // Mark: - Instance Properties
     fileprivate var citiesModelView = [CityModelView]()
     fileprivate var filteredCity = [CityModelView]()
@@ -24,43 +24,24 @@ class CityTableViewController: UITableViewController {
       return searchController.isActive && !isSearchBarEmpty
     }
     
-    // Mark: - Instance Properties
-    override init(style: UITableView.Style) {
-        super.init(style: style)
-        prepareTheTableViewController()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError()
-    }
-    
-    // Mark: - Method
-    fileprivate func fetchCityFromCoreData() -> [CityModelView] {
-        let request: NSFetchRequest<City> = City.fetchRequest()
-        
-        do {
-            return try sharedContext.fetch(request).map { CityModelView(city: $0) }
-        }catch _ { return  [CityModelView]() }
-    }
-    
-    fileprivate func prepareTheTableViewController() {
+    // Mark: - The base Configuration for the Controller
+    override func prepareTheTableViewController() {
+        super.prepareTheTableViewController()
         prepareThesearch()
         view.backgroundColor = .white
+        
+        // setup the refreshControl
         refreshControl = UIRefreshControl()
         refreshControl?.addTarget(self, action: #selector(reloadData), for: .valueChanged)
+        refreshControl?.beginRefreshing()
+        
         citiesModelView = fetchCityFromCoreData()
         tableView.register(CityTableViewCell.self, forCellReuseIdentifier: CityTableViewCell.reuseIdentifier)
         
         let addCityBarButtomItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addCity))
         navigationItem.setRightBarButton(addCityBarButtomItem, animated: true)
+        
         fetchAllDataFromServer()
-    }
-    
-    @objc fileprivate func addCity() {
-        let newCityTableViewController = NewCityTableViewController(style: .grouped)
-        newCityTableViewController.delegate = self
-        let nvNewCityVC = UINavigationController(rootViewController: newCityTableViewController)
-        present(nvNewCityVC, animated: true, completion: nil)
     }
     
     func prepareThesearch() {
@@ -71,10 +52,58 @@ class CityTableViewController: UITableViewController {
         definesPresentationContext = true
     }
     
+    
+    // Mark: - Method
+    fileprivate func fetchCityFromCoreData() -> [CityModelView] {
+        let request: NSFetchRequest<City> = City.fetchRequest()
+        
+        do {
+            return try sharedContext.fetch(request).map { CityModelView(city: $0) }
+        }catch _ { return  [CityModelView]() }
+    }
+
+    @objc fileprivate func addCity() {
+        let newCityTableViewController = NewCityTableViewController(style: .grouped)
+        newCityTableViewController.delegate = self
+        let nvNewCityVC = UINavigationController(rootViewController: newCityTableViewController)
+        present(nvNewCityVC, animated: true, completion: nil)
+    }
+    
     @objc fileprivate func reloadData() {
         fetchAllDataFromServer()
     }
     
+    // fetching data from the server
+    fileprivate func fetchAllDataFromServer() {
+        refreshControl?.beginRefreshing()
+        for (index, element) in citiesModelView.enumerated() {
+            DarkskyApiService.forecast(city: element) { [weak self](result) in
+                guard let weakSelf = self else { return }
+                
+                switch result {
+                case .failure(let error):
+                    debugPrint(error)
+                case .success(let data):
+                    DispatchQueue.main.async {
+                        let city = CityModelView(data: data, nameOfCity: element.name)
+                        weakSelf.citiesModelView[index] = city
+                        element.updateCityCoreData()
+                        weakSelf.tableView.reloadData()
+                    }
+                }
+            }
+        }
+        refreshControl?.endRefreshing()
+    }
+    
+    
+    func filterContentForSearchText(_ searchText: String) {
+        filteredCity = citiesModelView.filter({ (city) -> Bool in
+            return city.name.lowercased().contains(searchText.lowercased())
+        })
+        tableView.reloadData()
+    }
+
     // Mark: - Data source tableView
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -127,51 +156,7 @@ class CityTableViewController: UITableViewController {
         navigationController?.pushViewController(detailViewController, animated: true)
     }
     
-    // Using dispatch groups to fire an asynchronous callback when all your requests finish.
-    // https://stackoverflow.com/questions/35906568/wait-until-swift-for-loop-with-asynchronous-network-requests-finishes-executing?rq=1
-    fileprivate func fetchAllDataFromServer() {
-        refreshControl?.beginRefreshing()
-        for (index, element) in citiesModelView.enumerated() {
-            DarkskyApiService.forecast(city: element) { [weak self](result) in
-                guard let weakSelf = self else { return }
-                
-                switch result {
-                case .failure(let error):
-                    debugPrint(error)
-                case .success(let data):
-                    DispatchQueue.main.async {
-                        let city = CityModelView(data: data, nameOfCity: element.name)
-                        weakSelf.citiesModelView[index] = city
-                        weakSelf.updateCityCoreData(city: element)
-                        weakSelf.tableView.reloadData()
-                    }
-                }
-            }
-        }
-        refreshControl?.endRefreshing()
-        
-    }
     
-    func updateCityCoreData(city: CityModelView) {
-        let request: NSFetchRequest<City> = City.fetchRequest()
-        request.predicate = NSPredicate(format: "name = %@", city.name)
-        do {
-            let cities = try sharedContext.fetch(request)
-            if cities.count == 0 { return }
-            cities[0].setValue(city.temperature, forKey: "temperature")
-            cities[0].setValue(city.latitude, forKey: "latitude")
-            cities[0].setValue(city.longitude, forKey: "longitude")
-            cities[0].setValue(city.summary, forKey: "summary")
-            saveContext()
-        }catch _ {}
-    }
-    
-    func filterContentForSearchText(_ searchText: String) {
-        filteredCity = citiesModelView.filter({ (city) -> Bool in
-            return city.name.lowercased().contains(searchText.lowercased())
-        })
-        tableView.reloadData()
-    }
 }
 
 // Mark: - Conform to NewCityDelegate

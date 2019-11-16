@@ -13,6 +13,8 @@
 		392B63E32380033D0077F818 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392B63E22380033D0077F818 /* Helper.swift */; };
 		392B63E8238010D90077F818 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392B63E7238010D90077F818 /* HeaderView.swift */; };
 		392B63EA23801F8D0077F818 /* DetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392B63E923801F8D0077F818 /* DetailTableViewCell.swift */; };
+		392B63EC238023440077F818 /* BaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392B63EB238023440077F818 /* BaseTableViewController.swift */; };
+		392B63EF23802AF80077F818 /* Extension+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392B63EE23802AF80077F818 /* Extension+UIView.swift */; };
 		398485E3237EAA77000C2677 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398485E2237EAA77000C2677 /* AppDelegate.swift */; };
 		398485E5237EAA77000C2677 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398485E4237EAA77000C2677 /* SceneDelegate.swift */; };
 		398485EC237EAA78000C2677 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 398485EB237EAA78000C2677 /* Assets.xcassets */; };
@@ -46,6 +48,8 @@
 		392B63E22380033D0077F818 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		392B63E7238010D90077F818 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		392B63E923801F8D0077F818 /* DetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTableViewCell.swift; sourceTree = "<group>"; };
+		392B63EB238023440077F818 /* BaseTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewController.swift; sourceTree = "<group>"; };
+		392B63EE23802AF80077F818 /* Extension+UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIView.swift"; sourceTree = "<group>"; };
 		398485DF237EAA77000C2677 /* Weather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Weather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		398485E2237EAA77000C2677 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		398485E4237EAA77000C2677 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -112,6 +116,14 @@
 			path = UIView;
 			sourceTree = "<group>";
 		};
+		392B63ED23802ACF0077F818 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				392B63EE23802AF80077F818 /* Extension+UIView.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		39405D7EEEFCBA7762A50329 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -139,6 +151,7 @@
 		398485E1237EAA77000C2677 /* Weather */ = {
 			isa = PBXGroup;
 			children = (
+				392B63ED23802ACF0077F818 /* Extension */,
 				392B63E1238003370077F818 /* Helper */,
 				39848612237EECAB000C2677 /* Protocol */,
 				3984860D237ECD7A000C2677 /* Configuration */,
@@ -194,6 +207,7 @@
 				39848602237EBD05000C2677 /* CityTableViewController.swift */,
 				39848610237EEAE9000C2677 /* NewCityTableViewController.swift */,
 				39848619237EFC69000C2677 /* DetailsTableViewController.swift */,
+				392B63EB238023440077F818 /* BaseTableViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -307,6 +321,7 @@
 			files = (
 				39848624237F0627000C2677 /* BlockDataDaily.swift in Sources */,
 				39848603237EBD05000C2677 /* CityTableViewController.swift in Sources */,
+				392B63EF23802AF80077F818 /* Extension+UIView.swift in Sources */,
 				392B63EA23801F8D0077F818 /* DetailTableViewCell.swift in Sources */,
 				39848626237F0656000C2677 /* MinetlyData.swift in Sources */,
 				398485FF237EB5E4000C2677 /* CityTableViewCell.swift in Sources */,
@@ -322,6 +337,7 @@
 				39848609237EC94C000C2677 /* CoreDataStackManage.swift in Sources */,
 				392B63E0237FFF860077F818 /* BlockDataDailyModelView.swift in Sources */,
 				398485E5237EAA77000C2677 /* SceneDelegate.swift in Sources */,
+				392B63EC238023440077F818 /* BaseTableViewController.swift in Sources */,
 				39848616237EF071000C2677 /* NewCityDelegate.swift in Sources */,
 				3984861A237EFC69000C2677 /* DetailsTableViewController.swift in Sources */,
 				39848601237EB867000C2677 /* City.swift in Sources */,

@@ -10,7 +10,7 @@ import UIKit
 
 
 class BlockDataDailyModelView {
-    
+    // Mark: - Instance Properties
     private let formater = DateFormatter()
     
     let heighTemperature: String
@@ -19,6 +19,7 @@ class BlockDataDailyModelView {
     let imageName: String
     let summry: String
     
+    // Mark: - Object LifeCycle
     init(blockdataDaily: BlockDataDaily) {
         
         formater.dateFormat = "EEEE"
@@ -31,6 +32,7 @@ class BlockDataDailyModelView {
         summry = blockdataDaily.summary ?? ""
     }
     
+    // Mark: - Compute Properties
     var iconImages: [UIImage] {
         return ImageFacotory(string: imageName)?.images ?? [UIImage]()
     }

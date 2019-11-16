@@ -11,12 +11,13 @@ import UIKit
 
 class DailyTableViewCell: BaseTableViewCell {
     
-    // Mark: - Instance
+    // Mark: - Instance Properties
     private let dayLabel = getLabel(fontName: "HelveticaNeue-Bold", size: 21)
     private var iconImageView = UIImageView()
     private let heighTemperatureLabel = getLabel(fontName: "HelveticaNeue", size: 21)
     private let lowTemperatureLabel = getLabel(fontName: "HelveticaNeue", size: 21)
     private let summryLabel = getLabel(fontName: "HelveticaNeue-Light", size: 17)
+    
     // Mark: - Method
     func configure(cell with: BlockDataDailyModelView) {
         dayLabel.text = with.day
@@ -26,10 +27,9 @@ class DailyTableViewCell: BaseTableViewCell {
         summryLabel.text = with.summry
     }
     
+    // Mark: - Setup Layout
     override func setupLayout() {
         super.setupLayout()
-        
-        
         summryLabel.numberOfLines = 0
         
         let temperatureStack = UIStackView(arrangedSubviews: [heighTemperatureLabel, lowTemperatureLabel])
@@ -65,13 +65,7 @@ class DailyTableViewCell: BaseTableViewCell {
         addSubview(mainStackView)
         mainStackView.translatesAutoresizingMaskIntoConstraints = false
         
-        mainStackView.topAnchor.constraint(equalTo: topAnchor, constant: 6).isActive = true
-        mainStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -6).isActive = true
-        mainStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16).isActive = true
-        mainStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12).isActive = true
-        
-        
-        
+        mainStackView.autoLayout(topAnchor: topAnchor, bottomAnchor: bottomAnchor, leadingAnchor: leadingAnchor, trailingAnchor: trailingAnchor, margin: .init(top: 6, left: 16, bottom: 6, right: 12))
     }
     
     

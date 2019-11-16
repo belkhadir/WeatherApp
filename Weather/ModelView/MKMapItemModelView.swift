@@ -10,12 +10,13 @@ import MapKit
 
 
 class MKMapItemModelView {
-    
+    // Mark: - Instance Properties
     var cityName: String = ""
     var countryName: String = ""
     var latitude: Double = 0.0
     var longitude: Double = 0.0
     
+    // Mark: - Object LifeCycle
     init(item: MKPlacemark) {
         
         let splitElement = item.title?.split(separator: ",")

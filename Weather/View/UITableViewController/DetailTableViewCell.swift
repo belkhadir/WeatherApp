@@ -10,18 +10,21 @@ import UIKit
 
 
 class DetailTableViewCell: BaseTableViewCell {
-
+    // Mark: - Instance Properties
+    fileprivate let titleLabel = getLabel(fontName: "HelveticaNeue-Bold", size: 21)
+    fileprivate let detailTitleLabel = getLabel(fontName: "HelveticaNeue", size: 21)
+    fileprivate let imageViewIcon = UIImageView()
+    
+    // Mark: - Method
     func configure(cell with: (key: String, value: Any, icon: String)) {
          titleLabel.text = with.key
          detailTitleLabel.text = "\(with.value)"
          imageViewIcon.image = UIImage(named: with.icon)
     }
 
-
-    fileprivate let titleLabel = getLabel(fontName: "HelveticaNeue-Bold", size: 21)
-    fileprivate let detailTitleLabel = getLabel(fontName: "HelveticaNeue", size: 21)
-    fileprivate let imageViewIcon = UIImageView()
     
+    
+    // Mark: - Setup Layout
     override func setupLayout() {
         super.setupLayout()
         
@@ -40,11 +43,8 @@ class DetailTableViewCell: BaseTableViewCell {
         overAllStackView.spacing = 32
         
         addSubview(overAllStackView)
-        overAllStackView.translatesAutoresizingMaskIntoConstraints = false
         
-        overAllStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12).isActive = true
-        overAllStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12).isActive = true
-        overAllStackView.topAnchor.constraint(equalTo: topAnchor, constant: 8).isActive = true
-        overAllStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8).isActive = true
+        overAllStackView.autoLayout(topAnchor: topAnchor, bottomAnchor: bottomAnchor, leadingAnchor: leadingAnchor, trailingAnchor: trailingAnchor, margin: .init(top: 8, left: 12, bottom: 8, right: 12))
+
     }
 }
